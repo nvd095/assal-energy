@@ -3793,6 +3793,7 @@ blockquote{
 		left: 0px;
 		right: 0px;
 		bottom: 60px;
+		height: 160px;
 	}
 	.industify_slider_alpha .owl_control > div{
 		width: 50%;
@@ -3993,6 +3994,16 @@ blockquote{
 	clear: both;
 	padding: 150px 0;
 }
+@media (max-width: 767px) {
+	.about_section{
+		width: 100%;
+		float: left;
+		clear: both;
+		padding: 30px 0;
+	}
+}
+
+
 .fn_cs_about{
 	width: 100%;
 	float: left;
@@ -4466,6 +4477,14 @@ blockquote{
 	float: left;
 	clear: both;
 	padding: 150px 0;
+}
+@media (max-width: 767px) {
+	.service_section{
+		width: 100%;
+		float: left;
+		clear: both;
+		padding: 30px 0;
+	}
 }
 .fn_cs_about_with_rating{
 	width: 100%;
@@ -9496,5 +9515,11 @@ blockquote{
 	.industify_fn_psingle_content .hp_inner{
 		padding-right: 30px;
 		padding-left: 30px;
+	}
+	.industify_slider_alpha[data-box-pos="cr"] .title_holder{
+		left:30px;
+	}
+	.in > span{
+		bottom: 52px;
 	}
 }
