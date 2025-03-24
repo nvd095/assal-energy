@@ -3708,7 +3708,7 @@ blockquote{
 }
 .industify_slider_alpha[data-text-effect="enabled"] .title_holder .in > *{
 	overflow: hidden;
-	display: block;
+	display: block !important;
 	position: relative;
 }
 .industify_slider_alpha[data-text-effect="enabled"] .title_holder .in > * > span{
