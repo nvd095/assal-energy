@@ -986,23 +986,23 @@ a:focus {
 	padding: 95px 0px 35px 0px;
 }
 .industify_fn_pagetitle .title_holder:after{
-	left: 0px;
+	/* left: 0px;
 	position: absolute;
 	content: '';
 	bottom: 0px;
 	height: 6px;
 	width: 70px;
-	background-color: #eee;
+	background-color: #eee; */
 }
 .industify_fn_pagetitle .title_holder:before{
-	left: 0px;
+	/* left: 0px;
 	position: absolute;
 	content: '';
 	bottom: 13px;
 	height: 6px;
 	width: 150px;
 	background-color: #eee;
-	border-radius: 10px;
+	border-radius: 10px; */
 }
 .industify_fn_pagetitle h3{
 	margin: 0px;
