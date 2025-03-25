@@ -3008,7 +3008,7 @@ blockquote{
 	clear: both;
 	position: relative;
 	background-color: #063B39;
-	padding: 61px 60px 63px 0px;
+	padding: 26px 60px 63px 0px;
 }
 .industify_fn_footer .bottom_widget{
 	width: 100%;
@@ -3058,7 +3058,7 @@ blockquote{
 	clear: both;
 	position: relative;
 	z-index: 2;
-	padding: 83px 0px 49px 0px;
+	padding: 35px 0px 49px 0px;
 }
 .industify_fn_footer .footer_widget .inner{
 	width: 100%;
@@ -3993,7 +3993,7 @@ blockquote{
 	width: 100%;
 	float: left;
 	clear: both;
-	padding: 150px 0;
+	padding: 30px 0;
 }
 @media (max-width: 767px) {
 	.about_section{
@@ -4477,7 +4477,7 @@ blockquote{
 	width: 100%;
 	float: left;
 	clear: both;
-	padding: 150px 0;
+	padding: 30px 0;
 }
 @media (max-width: 767px) {
 	.service_section{
