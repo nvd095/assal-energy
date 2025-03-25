@@ -489,7 +489,7 @@ a:focus {
 	flex-direction: row;
 }
 .industify_fn_header .menu_logo{
-	margin: 0px 60px 0px 50px;
+	margin: 0px 60px 0px 84px;
 	display: flex;
 	align-items: center;
 }
@@ -3498,7 +3498,7 @@ blockquote{
 }
 .industify_slider_alpha .title_holder{
 	position: absolute;
-	top: 60%;
+	top: 66%;
 	margin-top: -235px;
 	width: 480px;
 	height: 470px;
