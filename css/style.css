@@ -3334,6 +3334,7 @@ blockquote{
 	.industify_fn_totop{display: none !important;}
 	.industify_fn_toppanel .left_panel > *:last-child{
 		padding-right: 0px;
+		padding-left: 0px;
 	}
 }
 /*------------------------------------------------------------------*/ 
