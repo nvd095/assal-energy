@@ -3332,6 +3332,9 @@ blockquote{
 		padding-right: 0;
 	}
 	.industify_fn_totop{display: none !important;}
+	.industify_fn_toppanel .left_panel > *:last-child{
+		padding-right: 0px;
+	}
 }
 /*------------------------------------------------------------------*/ 
 /*	23.1 TOTOP
