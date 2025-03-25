@@ -983,7 +983,7 @@ a:focus {
 	float: left;
 	clear: both;
 	position: relative;
-	padding: 95px 0px 35px 0px;
+	padding: 20px 0px 25px 0px;
 }
 .industify_fn_pagetitle .title_holder:after{
 	/* left: 0px;
@@ -1086,8 +1086,8 @@ a:focus {
     width: -webkit-calc(100% - 300px);
 	float: left;
 	padding-right: 50px;
-	padding-top: 120px;
-	padding-bottom: 147px;
+	padding-top: 12px;
+	padding-bottom: 17px;
 	
 }
 .industify_fn_rightsidebar{
