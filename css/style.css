@@ -874,6 +874,7 @@ a:focus {
 }
 .industify_fn_toppanel .left_panel > *:last-child{
 	padding-right: 0;
+	padding-left: 43px;
 }
 .industify_fn_toppanel .left_panel > *{
 	padding: 5px 0;
