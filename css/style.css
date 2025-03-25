@@ -150,7 +150,7 @@ a:focus {
 	width: 100%;
 	float: left;
 	clear: both;
-	padding: 20px;
+	/* padding: 20px; */
 	background-color: #063B39;
 }
 .industify_fn_mobilemenu_wrap .logo_hamb .in{
@@ -171,8 +171,8 @@ a:focus {
 	width: 100%;
 	float: left;
 	clear: both;
-	padding: 40px 20px 30px 20px;
-	background-color: #090909;
+	padding: 15px 20px 30px 20px;
+	background-color: #063B39;
 	display: none;
 }
 .industify_fn_mobilemenu_wrap .vert_menu_list ul{
@@ -3794,7 +3794,7 @@ blockquote{
 		left: 0px;
 		right: 0px;
 		bottom: 60px;
-		height: 160px;
+		height: 210px;
 	}
 	.industify_slider_alpha .owl_control > div{
 		width: 50%;
