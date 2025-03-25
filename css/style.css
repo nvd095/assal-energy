@@ -596,7 +596,7 @@ a:focus {
 	min-width: -moz-max-content;
 	min-width: -webkit-max-content;
 	width: 90px;
-	background-color: #000;
+	background-color: #063B39;
 	padding: 5px 12px;
 	border-radius: 5px;
 }
@@ -3121,7 +3121,7 @@ blockquote{
 	top: 0px;
 	right: 0px;
 	bottom: 0px;
-	background-color: rgba(8,18,37,1);
+	background-color:#063B39;
 	opacity: .9;
 	content: '';
 }
@@ -3503,7 +3503,7 @@ blockquote{
 	height: 470px;
 	left: 0px;
 	z-index: 4;
-	background-color: rgb(56 106 56 / 90%);
+	background-color: #063B39;
 	padding: 40px;
 }
 .industify_slider_alpha .title_holder .inner{
@@ -4949,7 +4949,7 @@ blockquote{
 	right: 0;
 	bottom: 0;
 	z-index: 1;
-	background-color: rgba(20,21,30,.9);
+	background-color: rgb(26 53 37 / 90%);
 }
 .fn_cs_single_testimonial{
 	width: 100%;
