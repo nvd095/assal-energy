@@ -151,7 +151,7 @@ a:focus {
 	float: left;
 	clear: both;
 	padding: 20px;
-	background-color: #0f0f16;
+	background-color: #063B39;
 }
 .industify_fn_mobilemenu_wrap .logo_hamb .in{
 	width: 100%;
@@ -1094,7 +1094,7 @@ a:focus {
 	width: 300px;
 	float: right;
 	padding-top: 11px;
-	padding-bottom: 147px;
+	padding-bottom: 17px;
 }
 @media(max-width: 1200px){
 	.industify_fn_leftsidebar{width: 100%;padding-right: 0;}
