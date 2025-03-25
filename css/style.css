@@ -525,7 +525,7 @@ a:focus {
 }
 .industify_fn_header .vert_nav > li > a{
 	display: block;
-    line-height: 104px;
+    line-height: 73px;
     height: 104px;
     text-transform: uppercase;
     font-size: 14px;
@@ -543,7 +543,7 @@ a:focus {
 	content: '';
     position: absolute;
     right: 0px;
-    top: 50%;
+    top: 36%;
 	margin-top: -5px;
     border: 5px solid transparent;
     border-top-color: #000;
@@ -2489,7 +2489,7 @@ a:focus {
 /*	18) CONTACT PAGE
 /*------------------------------------------------------------------*/
 .industify_fn_contact{
-	padding: 120px 0;
+	/* padding: 120px 0; */
 	width: 100%;
 	float: left;
 	clear: both;
@@ -2501,6 +2501,7 @@ a:focus {
 .contact_holder{
 	width: 100%;
 	display: flex;
+	margin-bottom: 10px;
 }
 .contact_holder .contact_left{
 	width: 40%;
@@ -2511,7 +2512,7 @@ a:focus {
 .contact_holder .contact_left h3{
 	margin: 0;
     padding: 30px;
-    background: #111422;
+    background: #063B39;
     color: #fff;
 }
 .contact_holder .contact_right{
@@ -9170,7 +9171,7 @@ blockquote{
 	clear: both;
 	padding: 21px 80px 21px 30px;
 	position: relative;
-	background-color: #111422;
+	background-color: #063B39;
 }
 .fn_cs_location_list .title_holder h3{
 	margin: 0px;
