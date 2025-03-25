@@ -235,7 +235,7 @@ a:focus {
 	width: 100%;
 	float: left;
 	clear: both;
-	background-color: #081414;
+	background-color: #063B39;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -3981,7 +3981,7 @@ blockquote{
 	.fn_cs_principles_modern ul li{width: 100% !important;}
 }
 @media(max-width: 480px){
-	.fn_cs_principles_modern .item{padding: 95px 30px 75px 30px;}
+	.fn_cs_principles_modern .item{padding: 60px 30px 55px 29px}
 	.fn_cs_principles_modern .item .number_holder{left: 30px;height: 70px;}
 	.fn_cs_principles_modern .item .number_holder:after{border-top-width: 60px;}
 	.fn_cs_principles_modern .item .icon{left: 30px;bottom: 38px;}
