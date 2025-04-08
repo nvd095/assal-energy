@@ -946,7 +946,7 @@ a:focus {
 [data-nav-skin="transdark"] .industify_fn_header{position: absolute;background-color: rgba(0,0,0,0.3);border-bottom: none;}
 [data-nav-skin="transdark"] .industify_fn_header .desktop_logo_dark{display: none;}
 [data-nav-skin="transdark"] .industify_fn_header .desktop_logo{display: block;}
-[data-nav-skin="transdark"] .industify_fn_header .vert_nav > li > a{color: #eee;}
+[data-nav-skin="transdark"] .industify_fn_header .vert_nav > li > a{color: #eee; outline: none;}
 [data-nav-skin="transdark"] .lang_switcher .click{color: #eee;}
 [data-nav-skin="transdark"] .lang_switcher .click:after{border-top-color: #eee;}
 [data-nav-skin="transdark"] .industify_fn_header .toll_free .shape1:before{background-color: rgba(255,255,255,.1);}
