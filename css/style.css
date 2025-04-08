@@ -796,6 +796,7 @@ a:focus {
 	text-decoration: none;
 	font-family: 'Rubik';
 	font-size: 14px;
+	outline: none;
 }
 .industify_fn_header .vert_nav > li > ul:hover a{
 	color: #eee;
