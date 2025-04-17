@@ -536,6 +536,7 @@ a:focus {
     text-decoration: none;
     color: #000;
     position: relative;
+	outline: none;
 }
 .industify_fn_header .vert_nav > .menu-item-has-children > a{
 	padding-right: 13px;
@@ -1098,6 +1099,8 @@ a:focus {
 	float: right;
 	padding-top: 11px;
 	padding-bottom: 17px;
+	position: sticky;
+	top: 3px;
 }
 @media(max-width: 1200px){
 	.industify_fn_leftsidebar{width: 100%;padding-right: 0;}
