@@ -4097,8 +4097,8 @@ blockquote{
 	position: absolute;
 	z-index: 2;
 	right: 40px;
-	left: auto !important;
-	top: 40px !important;
+	/* left: auto !important; */
+	top: 0px !important;
 	box-shadow: 0px 0px 20px rgba(0,0,0,0.2);
 }
 .fn_cs_about .abs_img{
