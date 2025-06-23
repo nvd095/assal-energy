@@ -3508,14 +3508,14 @@ blockquote{
 }
 .industify_slider_alpha .title_holder{
 	position: absolute;
-	top: 66%;
-	margin-top: -235px;
-	width: 480px;
-	height: 470px;
+	top: 64%;
+	margin-top: -238px;
+	width: 356px;
+	height: 310px;
 	left: 0px;
 	z-index: 4;
 	background-color: #063B39;
-	padding: 40px;
+	padding: 25px;
 }
 .industify_slider_alpha .title_holder .inner{
 	display: table;
