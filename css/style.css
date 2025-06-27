@@ -8794,7 +8794,7 @@ blockquote{
 }
 @media(max-width: 768px){
 	.hpmobile{
-		height: 380px;
+		height: 370px;
 	}
 	.fn_cs_project_elegant_list .first_line .left_part{
 		width: 100%;
@@ -9535,8 +9535,5 @@ blockquote{
 	}
 	.in > span{
 		bottom: 52px;
-	}
-	.video_holder{
-		top:-36px !important;
 	}
 }
