@@ -3491,7 +3491,7 @@ blockquote{
 	clear: both;
 	position: relative;
 	height: 100vh;
-	min-height: 590px;
+	min-height: 550px;
 	overflow: hidden;
 }
 .industify_slider_alpha .img_holder{
@@ -8793,6 +8793,9 @@ blockquote{
 	}
 }
 @media(max-width: 768px){
+	.hpmobile{
+		height: 380px;
+	}
 	.fn_cs_project_elegant_list .first_line .left_part{
 		width: 100%;
 	}
@@ -9528,9 +9531,12 @@ blockquote{
 		padding-left: 30px;
 	}
 	.industify_slider_alpha[data-box-pos="cr"] .title_holder{
-		left:30px;
+		/* left:30px; */
 	}
 	.in > span{
 		bottom: 52px;
+	}
+	.video_holder{
+		top:-36px !important;
 	}
 }
