@@ -9532,6 +9532,7 @@ blockquote{
 	}
 	.industify_slider_alpha[data-box-pos="cr"] .title_holder{
 		/* left:30px; */
+		position: relative;
 	}
 	.in > span{
 		bottom: 52px;
