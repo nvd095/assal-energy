@@ -19,6 +19,8 @@ window.addEventListener("load", function(){
 		
 		/* collect all functions for next initialization */
 		init: function(){
+			/* i18n */
+			Industify.i18nInit();
 			
 			/* Set background image from data attribute */
 			Industify.BgImg();
@@ -616,6 +618,279 @@ window.addEventListener("load", function(){
 				}
 			}
 
+		},
+
+		i18nInit: function(){
+			Industify.i18nCreateBanner();
+			var lang = Industify.i18nGetLang();
+			Industify.i18nSetHtmlLang(lang);
+			Industify.i18nLoad(lang);
+		},
+
+		i18nGetLang: function(){
+			var stored = '';
+			try {
+				stored = localStorage.getItem('assal_lang');
+			} catch (e) {
+				stored = '';
+			}
+			return stored || 'en';
+		},
+
+		i18nSetLang: function(lang){
+			try {
+				localStorage.setItem('assal_lang', lang);
+			} catch (e) {}
+			Industify.i18nSetHtmlLang(lang);
+			Industify.i18nLoad(lang);
+		},
+
+		i18nSetHtmlLang: function(lang){
+			document.documentElement.setAttribute('lang', lang);
+		},
+
+		i18nCreateBanner: function(){
+			if($('.assal-lang-banner').length){ return; }
+			var stored = '';
+			try {
+				stored = localStorage.getItem('assal_lang');
+			} catch (e) {
+				stored = '';
+			}
+			if(stored){ return; }
+
+			var banner = $('<div class="assal-lang-banner" role="dialog" aria-live="polite"></div>');
+			var text = $('<span class="assal-lang-banner__text" data-i18n="banner.prompt">Read this website in:</span>');
+			var btnEn = $('<button type="button" class="assal-lang-banner__btn" data-lang="en" data-i18n="banner.english">English</button>');
+			var btnEs = $('<button type="button" class="assal-lang-banner__btn" data-lang="es" data-i18n="banner.spanish">Español</button>');
+			var actions = $('<div class="assal-lang-banner__actions"></div>');
+			actions.append(btnEn, btnEs);
+			banner.append(text, actions);
+			$('body').prepend(banner).addClass('assal-lang-banner-visible');
+
+			banner.on('click', 'button[data-lang]', function(){
+				var lang = $(this).data('lang');
+				$('body').removeClass('assal-lang-banner-visible');
+				banner.remove();
+				Industify.i18nSetLang(lang);
+			});
+		},
+
+		i18nLoad: function(lang){
+			$.getJSON('/i18n/' + lang + '.json')
+				.done(function(data){
+					Industify.i18nData = data || {};
+					Industify.i18nApply(lang);
+				})
+				.fail(function(){
+					Industify.i18nData = {};
+					Industify.i18nApply(lang);
+				});
+		},
+
+		i18nApply: function(lang){
+			var data = Industify.i18nData || {};
+			$('[data-i18n]').each(function(){
+				var el = $(this);
+				var key = el.data('i18n');
+				var value = data[key];
+				if(typeof value !== 'undefined'){
+					if(el.data('i18nHtml')){
+						el.html(value);
+					}else{
+						el.text(value);
+					}
+				}
+
+				var attrList = el.data('i18nAttr');
+				if(attrList){
+					var attrs = String(attrList).split('|');
+					$.each(attrs,function(_,attr){
+						var attrKey = key + '.' + attr;
+						if(typeof data[attrKey] !== 'undefined'){
+							el.attr(attr, data[attrKey]);
+						}
+					});
+				}
+			});
+			Industify.i18nAutoTranslate(lang || 'en');
+		},
+
+		i18nAutoTranslate: function(lang){
+			if(lang === 'en'){
+				Industify.i18nAutoRestore();
+				return;
+			}
+			var cache = Industify.i18nAutoLoadCache(lang);
+			var nodes = Industify.i18nAutoCollectNodes();
+			var attrs = Industify.i18nAutoCollectAttributes();
+			var queue = [];
+
+			nodes.forEach(function(node){
+				var original = node.nodeValue;
+				if(!node._i18nOriginal){
+					node._i18nOriginal = original;
+				}
+				var cached = cache[original];
+				if(cached){
+					node.nodeValue = cached;
+				}else{
+					queue.push({type: 'text', node: node, key: original});
+				}
+			});
+
+			attrs.forEach(function(entry){
+				var key = entry.key;
+				if(!entry.el._i18nAttrOriginal){
+					entry.el._i18nAttrOriginal = {};
+				}
+				if(typeof entry.el._i18nAttrOriginal[entry.attr] === 'undefined'){
+					entry.el._i18nAttrOriginal[entry.attr] = entry.value;
+				}
+				var cached = cache[key];
+				if(cached){
+					entry.el.setAttribute(entry.attr, cached);
+				}else{
+					queue.push({type: 'attr', el: entry.el, attr: entry.attr, value: entry.value, key: key});
+				}
+			});
+
+			if(!queue.length){ return; }
+			Industify.i18nAutoTranslateQueue(queue, lang, cache);
+		},
+
+		i18nAutoRestore: function(){
+			var nodes = Industify.i18nAutoCollectNodes(true);
+			nodes.forEach(function(node){
+				if(node._i18nOriginal){
+					node.nodeValue = node._i18nOriginal;
+				}
+			});
+
+			var attrs = Industify.i18nAutoCollectAttributes(true);
+			attrs.forEach(function(entry){
+				if(entry.el._i18nAttrOriginal && typeof entry.el._i18nAttrOriginal[entry.attr] !== 'undefined'){
+					entry.el.setAttribute(entry.attr, entry.el._i18nAttrOriginal[entry.attr]);
+				}
+			});
+		},
+
+		i18nAutoCollectNodes: function(includeTranslated){
+			var nodes = [];
+			var walker = document.createTreeWalker(
+				document.body,
+				NodeFilter.SHOW_TEXT,
+				{
+					acceptNode: function(node){
+						var text = node.nodeValue;
+						if(!text){ return NodeFilter.FILTER_REJECT; }
+						if(!text.trim()){ return NodeFilter.FILTER_REJECT; }
+						if(/^[\\d\\s.,:%€$£¥-]+$/.test(text.trim())){ return NodeFilter.FILTER_REJECT; }
+						var parent = node.parentElement;
+						if(!parent){ return NodeFilter.FILTER_REJECT; }
+						if(parent.closest('script,style,noscript')){ return NodeFilter.FILTER_REJECT; }
+						if(parent.closest('[data-i18n],[data-i18n-skip]')){ return NodeFilter.FILTER_REJECT; }
+						if(!includeTranslated && node._i18nOriginal){ return NodeFilter.FILTER_REJECT; }
+						return NodeFilter.FILTER_ACCEPT;
+					}
+				},
+				false
+			);
+			var current;
+			while((current = walker.nextNode())){
+				nodes.push(current);
+			}
+			return nodes;
+		},
+
+		i18nAutoCollectAttributes: function(includeTranslated){
+			var attrs = [];
+			var attrList = ['placeholder', 'title', 'alt', 'aria-label', 'value'];
+			$('*').each(function(){
+				var el = this;
+				if(el.closest('[data-i18n],[data-i18n-skip]')){ return; }
+				if(el.tagName && ['SCRIPT','STYLE','NOSCRIPT'].indexOf(el.tagName) !== -1){ return; }
+				for(var i = 0; i < attrList.length; i++){
+					var attr = attrList[i];
+					var value = el.getAttribute(attr);
+					if(!value){ continue; }
+					if(!value.trim()){ continue; }
+					if(/^[\d\s.,:%€$£¥-]+$/.test(value.trim())){ continue; }
+					if(!includeTranslated && el._i18nAttrOriginal && typeof el._i18nAttrOriginal[attr] !== 'undefined'){ continue; }
+					attrs.push({
+						el: el,
+						attr: attr,
+						value: value,
+						key: attr + '::' + value
+					});
+				}
+			});
+			return attrs;
+		},
+
+		i18nAutoLoadCache: function(lang){
+			var key = 'assal_i18n_auto_' + lang;
+			var cache = {};
+			try {
+				var raw = localStorage.getItem(key);
+				if(raw){ cache = JSON.parse(raw); }
+			} catch (e) {
+				cache = {};
+			}
+			return cache;
+		},
+
+		i18nAutoSaveCache: function(lang, cache){
+			var key = 'assal_i18n_auto_' + lang;
+			try {
+				localStorage.setItem(key, JSON.stringify(cache));
+			} catch (e) {}
+		},
+
+		i18nAutoTranslateQueue: function(queue, lang, cache){
+			var maxItems = 30;
+			var batch = queue.splice(0, maxItems);
+			if(!batch.length){ return; }
+
+			var tasks = batch.map(function(item){
+				var text = item.key;
+				if(item.type === 'text'){
+					text = item.node._i18nOriginal || item.node.nodeValue;
+				} else if(item.type === 'attr'){
+					text = item.value;
+				}
+				return Industify.i18nAutoTranslateText(text, lang)
+					.then(function(translated){
+						if(!translated){ return; }
+						cache[item.key] = translated;
+						if(item.type === 'text'){
+							item.node.nodeValue = translated;
+						} else if(item.type === 'attr'){
+							item.el.setAttribute(item.attr, translated);
+						}
+					});
+			});
+
+			$.when.apply($, tasks).always(function(){
+				Industify.i18nAutoSaveCache(lang, cache);
+				if(queue.length){
+					setTimeout(function(){
+						Industify.i18nAutoTranslateQueue(queue, lang, cache);
+					}, 200);
+				}
+			});
+		},
+
+		i18nAutoTranslateText: function(text, lang){
+			var encoded = encodeURIComponent(text);
+			var url = 'https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=' + lang + '&dt=t&q=' + encoded;
+			return $.getJSON(url).then(
+				function(response){
+					if(!response || !response[0] || !response[0][0]){ return ''; }
+					return response[0].map(function(item){ return item[0]; }).join('');
+				},
+				function(){ return ''; }
+			);
 		},
 
 		
