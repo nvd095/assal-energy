@@ -117,6 +117,42 @@ html {
 	filter: brightness(0.95);
 }
 
+.assal_lang_toggle{
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	font-family: 'Rubik';
+	font-size: 11px;
+	letter-spacing: .2px;
+	color: #111;
+	flex-wrap: wrap;
+	justify-content: flex-end;
+}
+
+.assal_lang_toggle .lang_btn{
+	background: #f1f1f1;
+	border: 1px solid #d7d7d7;
+	border-radius: 4px;
+	padding: 4px 8px;
+	cursor: pointer;
+	color: #111;
+	font-weight: 600;
+	line-height: 1.2;
+}
+
+.assal_lang_toggle .lang_btn.active{
+	background: #0c1a2b;
+	border-color: #0c1a2b;
+	color: #fff;
+}
+
+.assal_lang_toggle--mobile{
+	display: flex;
+	justify-content: flex-end;
+	padding: 6px 12px 0 12px;
+	color: #111;
+}
+
 body.assal-lang-banner-visible {
 	padding-top: 52px;
 }
