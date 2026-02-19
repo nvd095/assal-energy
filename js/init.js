@@ -622,6 +622,7 @@ window.addEventListener("load", function(){
 
 		i18nInit: function(){
 			Industify.i18nCreateBanner();
+			Industify.i18nToggleInit();
 			var lang = Industify.i18nGetLang();
 			Industify.i18nSetHtmlLang(lang);
 			Industify.i18nLoad(lang);
@@ -714,6 +715,101 @@ window.addEventListener("load", function(){
 				}
 			});
 			Industify.i18nAutoTranslate(lang || 'en');
+			Industify.i18nUpdateToggle(lang || 'en');
+			Industify.i18nSetFavicon(lang || 'en');
+			Industify.i18nSwapImages(lang || 'en');
+		},
+
+		i18nToggleInit: function(){
+			var toggle = $('[data-lang-toggle]');
+			if(!toggle.length){ return; }
+			toggle.off('click.assalLang').on('click.assalLang','button[data-lang]',function(){
+				var lang = $(this).data('lang');
+				Industify.i18nSetLang(lang);
+			});
+		},
+
+		i18nUpdateToggle: function(lang){
+			var toggle = $('[data-lang-toggle]');
+			if(!toggle.length){ return; }
+			toggle.find('button[data-lang]').each(function(){
+				var btn = $(this);
+				if(btn.data('lang') === lang){
+					btn.addClass('active');
+				}else{
+					btn.removeClass('active');
+				}
+			});
+		},
+
+		i18nSetFavicon: function(lang){
+			var href = (lang === 'es') ? '/img/favicon-es.jpg' : '/img/favicon-es.jpg';
+			var link = $('link[rel~="icon"]').first();
+			if(!link.length){
+				link = $('<link rel="icon" />');
+				$('head').append(link);
+			}
+			link.attr('href', href);
+		},
+
+		i18nSwapImages: function(lang){
+			var imgs = $('img').not('[data-lang-skip]');
+			imgs.each(function(){
+				var el = $(this);
+				var original = el.data('langOriginal') || el.attr('src');
+				if(!el.data('langOriginal')){
+					el.data('langOriginal', original);
+				}
+				var target = Industify.i18nResolveImage(el, original, lang);
+				if(target === original){
+					el.attr('src', original);
+					return;
+				}
+				var preload = new Image();
+				preload.onload = function(){ el.attr('src', target); };
+				preload.onerror = function(){ el.attr('src', original); };
+				preload.src = target;
+			});
+
+			var bgEls = $('[data-bg-img], [data-fn-bg-img]').not('[data-lang-skip]');
+			bgEls.each(function(){
+				var el = $(this);
+				var attr = el.attr('data-bg-img') ? 'data-bg-img' : 'data-fn-bg-img';
+				var original = el.data('langOriginalBg') || el.attr(attr);
+				if(!el.data('langOriginalBg')){
+					el.data('langOriginalBg', original);
+				}
+				var target = Industify.i18nResolveImage(el, original, lang);
+				if(target === original){
+					el.attr(attr, original);
+					el.css('background-image', 'url(' + original + ')');
+					return;
+				}
+				var preload = new Image();
+				preload.onload = function(){
+					el.attr(attr, target);
+					el.css('background-image', 'url(' + target + ')');
+				};
+				preload.onerror = function(){
+					el.attr(attr, original);
+					el.css('background-image', 'url(' + original + ')');
+				};
+				preload.src = target;
+			});
+		},
+
+		i18nResolveImage: function(el, src, lang){
+			if(lang !== 'es'){ return src; }
+			var explicit = el.attr('data-lang-es') || el.attr('data-bg-img-es');
+			if(explicit){ return explicit; }
+			var parts = src.split('?');
+			var base = parts[0];
+			var query = parts.length > 1 ? '?' + parts.slice(1).join('?') : '';
+			if(base.indexOf('-es.') !== -1){ return base + query; }
+			var dot = base.lastIndexOf('.');
+			if(dot === -1){ return src; }
+			var next = base.slice(0, dot) + '-es' + base.slice(dot);
+			return next + query;
 		},
 
 		i18nAutoTranslate: function(lang){
