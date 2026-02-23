@@ -743,7 +743,7 @@ window.addEventListener("load", function(){
 		},
 
 		i18nSetFavicon: function(lang){
-			var href = (lang === 'es') ? '/img/favicon-es.jpg' : '/img/favicon-es.jpg';
+			var href = '/img/favicon.png';
 			var link = $('link[rel~="icon"]').first();
 			if(!link.length){
 				link = $('<link rel="icon" />');
